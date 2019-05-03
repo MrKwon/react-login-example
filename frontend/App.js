@@ -30,7 +30,7 @@ const stackNavigator = createStackNavigator({
     screen: SignupScreen,
     navigationOptions: {
       title: 'Signup',
-      header: null
+      // header: null
     }
   }
 });
