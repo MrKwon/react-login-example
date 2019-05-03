@@ -6,19 +6,48 @@ import {
   Button,
   TextInput,
   StatusBar,
-  TouchableOpacity
 } from 'react-native';
+
+import SplashScreen from './src/components/SplashScreen'
+
+const LoginInfo = ({id, password}) => {
+  return (
+    <View>
+      <Text>{id}</Text>
+      <Text>{password}</Text>
+    </View>
+  )
+}
+
 
 export default class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      isLoading: true,
       id: '',
       password: '',
-      loginstate: '',
+      loginstate: false,
+    }
+  }
+  performTimeConsumingTask = async() => {
+    return new Promise((resolve) =>
+      setTimeout(
+        () => { resolve('result') },
+        1000
+      )
+    )
+  }
+  async componentWillMount() {
+    const data = await this.performTimeConsumingTask();
+    if (data !== null) {
+      this.setState({ isLoading: false })
     }
   }
   render() {
+    if (this.state.isLoading) {
+      return <SplashScreen />;
+    }
     return (
       <View style={styles.container}>
         <StatusBar
@@ -29,10 +58,11 @@ export default class App extends React.Component {
           <TextInput style={styles.textFieldStyle}
             placeholder="ID"
             autoCapitalize="none"
-            onKeyPress={(event) => {console.log(event.target)}}/>
+            onChangeText={(event) => {this.setState({id: event})}}/>
           <TextInput style={styles.textFieldStyle}
             placeholder="PASSWORD"
-            secureTextEntry={true}/>
+            secureTextEntry={true}
+            onChangeText={(event) => {this.setState({password: event})}}/>
         </View>
         <View style={{flexDirection: 'row'}}>
           <Button title="SIGN IN" color="#F78181" onPress={() => alert('sign in btn clicked')}/>
