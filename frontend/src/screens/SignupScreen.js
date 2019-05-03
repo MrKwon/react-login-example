@@ -35,27 +35,62 @@ export default class SignupScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <TextForm placeholder="ID"/>
-        <TextForm placeholder="PASSWORD"/>
-        <TextForm placeholder="PASSWORD CHECK"/>
-        <TextForm placeholder="NICK"/>
+        <TextForm
+          placeholder="ID"
+          autoCapitalize="none"
+          onChangeText={(_event) => {
+            this.setState({
+              id: _event
+            })
+          }}
+          />
+        <TextForm
+          placeholder="PASSWORD"
+          secureTextEntry={true}
+          onChangeText={(_event) => {
+            this.setState({
+              password: _event
+            })
+          }}/>
+        <TextForm
+          placeholder="PASSWORD CHECK"
+          secureTextEntry={true}
+          onChangeText={(_event) => {
+            this.setState({
+              passwordConfirm: _event
+            })
+          }}/>
+        <TextForm
+          placeholder="NICK"
+          onChangeText={(_event) => {
+            this.setState({
+              nick: _event
+            })
+          }}/>
         <ButtonForm title="SIGN UP"/>
-        {/* <View style={{flexDirection: 'row'}}>
-          <View style={styles.buttonContainer}>
-            <TouchableOpacity style={{
-                backgroundColor: 'black',
-                borderRadius: 10,
-                height: 40,
-                alignItems: 'center',
-                justifyContent: 'center'
-                }}>
-              <Text style={{color: 'white'}}>회원가입</Text>
-            </TouchableOpacity>
-          </View>
-        </View> */}
+        <Text>{this.state.id}</Text>
+        <Text>{this.state.password}</Text>
+        <Text>{this.state.passwordConfirm}</Text>
+        <Text>{this.state.nick}</Text>
       </View>
     )
   }
+}
+
+const TextForm = (props) => {
+  return (
+    <View style={{flexDirection: 'row'}}>
+      <View style={styles.textInputContainer}>
+        <TextInput
+          style={styles.textFieldStyle}
+          placeholder={props.placeholder}
+          onChangeText={props.onChangeText}
+          autoCapitalize={props.autoCapitalize}
+          secureTextEntry={props.secureTextEntry}
+          />
+      </View>
+    </View>
+  );
 }
 
 const ButtonForm = (props) => {
@@ -75,20 +110,19 @@ const ButtonForm = (props) => {
     </View>
   );
 }
-
-const TextForm = (props) => {
-  return (
-    <View style={{flexDirection: 'row'}}>
-      <View style={styles.textInputContainer}>
-        <TextInput
-          style={styles.textFieldStyle}
-          placeholder={props.placeholder}
-          />
-      </View>
-    </View>
-  );
-}
-
+/* <View style={{flexDirection: 'row'}}>
+  <View style={styles.buttonContainer}>
+    <TouchableOpacity style={{
+        backgroundColor: 'black',
+        borderRadius: 10,
+        height: 40,
+        alignItems: 'center',
+        justifyContent: 'center'
+        }}>
+      <Text style={{color: 'white'}}>회원가입</Text>
+    </TouchableOpacity>
+  </View>
+</View> */
 
 const styles = StyleSheet.create({
   container: {

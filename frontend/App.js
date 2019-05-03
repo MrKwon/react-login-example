@@ -13,24 +13,32 @@ import { createStackNavigator, createAppContainer } from 'react-navigation';
 
 import MainScreen from './src/screens/MainScreen'
 import SignupScreen from './src/screens/SignupScreen'
+import MyinfoScreen from './src/screens/MyinfoScreen'
 
 /**
  * This is entry point of this application.
  * stackNavigator is composing navigator.
  */
 const stackNavigator = createStackNavigator({
-  Main: {
+  MainScreen: {
     screen: MainScreen,
     navigationOptions: {
       title: 'Main',
-      header: null
+      header: null // 맨 위에 제목 적혀있는 네비게이션 바 없애기
     }
   },
   SignupScreen: {
     screen: SignupScreen,
     navigationOptions: {
-      title: 'Signup',
-      // header: null
+      title: 'Sign Up',
+      // header: null 
+    }
+  },
+  MyinfoScreen: {
+    screen: MyinfoScreen,
+    navigationOptions: {
+      title: 'My Info',
+      header: null
     }
   }
 });
