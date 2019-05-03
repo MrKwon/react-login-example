@@ -8,12 +8,14 @@ const stackNavigator = createStackNavigator({
   Main: {
     screen: MainScreen,
     navigationOptions: {
+      title: 'Main',
       header: null
     }
   },
   SignupScreen: {
     screen: SignupScreen,
     navigationOptions: {
+      title: 'Signup',
       header: null
     }
   }

@@ -34,6 +34,9 @@ export default class MainScreen extends Component {
       this.setState({ isLoading: false })
     }
   }
+  goSignupScreen() {
+    this.props.navigation.navigate('SignupScreen')
+  }
   render() {
     if (this.state.isLoading) {
       return <SplashScreen />;
@@ -56,7 +59,7 @@ export default class MainScreen extends Component {
         </View>
         <View style={{flexDirection: 'row'}}>
           <Button title="SIGN IN" color="#F78181" onPress={() => alert('sign in btn clicked')}/>
-          <Button title="SIGN UP" color="#FFFFFF" onPress={() => alert('sign up btn clicked')}/>
+          <Button title="SIGN UP" color="#FFFFFF" onPress={() => this.goSignupScreen()}/>
         </View>
       </View>
     );

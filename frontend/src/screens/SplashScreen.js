@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#4f6d7a'
+    backgroundColor: '#4B088A'
   },
   viewStyles: {
     color: 'white',

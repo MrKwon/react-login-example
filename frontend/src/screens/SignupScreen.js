@@ -7,7 +7,12 @@ import {
 export default class SignupScreen extends Component {
   render() {
     return (
-      <View>
+      <View style={{
+        flex: 1,
+        backgroundColor: '#fff',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center'}}>
         <Text>Here is SignupScreen</Text>
       </View>
     )
