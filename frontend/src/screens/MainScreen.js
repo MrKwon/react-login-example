@@ -1,3 +1,14 @@
+/*
+ * @(#)MainScreen.js
+ *
+ * v 0.0.0
+ *
+ * 2019.04.16
+ *
+ * Copyright (c) 2019 KwonMC.
+ * CEOS, Seoul, KOREA
+ * All right Reserved
+ */
 import React, { Component } from 'react';
 import {
   StyleSheet,
@@ -11,9 +22,9 @@ import {
 // import Screens
 import SplashScreen from './SplashScreen'
 
-// import Components
-import ErrorContainer from '../components/ErrorContainer'
-
+/**
+ * This Class is MainScreen of this application.
+ */
 export default class MainScreen extends Component {
   constructor(props) {
     super(props)
@@ -21,8 +32,7 @@ export default class MainScreen extends Component {
       isLoading: true,
       id: '',
       password: '',
-      loginstate: false,
-      error: '',
+      loginState: false
     }
   }
   performTimeConsumingTask = async() => {
@@ -44,17 +54,11 @@ export default class MainScreen extends Component {
   }
   textInputValidChecker() {
     if (this.state.id === '') {
-      this.setState({
-        error: '아이디를 입력해주세요'
-      })
+      alert('아이디를 입력해주세요.')
     } else if (this.state.password === '') {
-      this.setState({
-        error: '비밀번호를 입력해주세요'
-      })
+      alert('비밀번호를 입력해주세요.')
     } else {
-      this.setState({
-        error: ''
-      })
+      // TODO request to server comfirm id and password and login
     }
   }
   render() {
@@ -84,7 +88,6 @@ export default class MainScreen extends Component {
           </View>
         </View>
         <View style={{flexDirection: 'row'}}>
-          <ErrorContainer error={this.state.error}/>
         </View>
         <View style={styles.buttonContainer}>
           <Button

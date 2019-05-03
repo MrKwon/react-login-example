@@ -1,3 +1,7 @@
+/**
+ * 사용하지 않는 컴포넌트
+ */
+
 import React, { Component } from 'react';
 import {
   View,

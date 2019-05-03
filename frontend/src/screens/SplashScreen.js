@@ -1,3 +1,15 @@
+/*
+ * @(#)SplashScreen.js
+ *
+ * v 0.0.0
+ *
+ * 2019.04.16
+ *
+ * Copyright (c) 2019 KwonMC.
+ * CEOS, Seoul, KOREA
+ * All right Reserved
+ */
+
 import React, { Component } from 'react';
 import {
   View,
@@ -5,6 +17,9 @@ import {
   StyleSheet
 } from 'react-native';
 
+/**
+ * app logo screen
+ */
 export default class SplashScreen extends React.Component {
   render() {
     return (
