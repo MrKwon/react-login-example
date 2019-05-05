@@ -15,4 +15,11 @@ app.get('/status', (req, res) => {
   })
 })
 
-app.listen(process.env.PORT || 8081)
+app.post('/register', (req, res) => {
+  console.log(req.body)
+  res.send({
+    message: `Hello ${req.body.email}, Sign Up Success !`
+  })
+})
+
+app.listen(process.env.PORT || 7071)
