@@ -67,7 +67,6 @@ export default class MainScreen extends Component {
   async signInButtonRequester() {
     try {
       const message = await getResponseFromApi();
-      console.log(message)
       if (message !== null) {
         this.setState({
           messageChecker: message

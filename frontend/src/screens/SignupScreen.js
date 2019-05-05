@@ -18,6 +18,8 @@ import {
   StyleSheet
 } from 'react-native';
 
+import { postUserInfoToApi, getResponseFromApi } from '../services/request'
+
 /**
  * This is SignupScreen to register user infomation
  */
@@ -25,22 +27,21 @@ export default class SignupScreen extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      id: '',
+      email: '',
       password: '',
       passwordConfirm: '',
       nickname: ''
     }
   }
-  // TODO send request to server
   render() {
     return (
       <View style={styles.container}>
         <TextForm
-          placeholder="ID"
+          placeholder="EMAIL"
           autoCapitalize="none"
           onChangeText={(_event) => {
             this.setState({
-              id: _event
+              email: _event
             })
           }}
           />
@@ -67,8 +68,14 @@ export default class SignupScreen extends Component {
               nick: _event
             })
           }}/>
-        <ButtonForm title="SIGN UP"/>
-        <Text>{this.state.id}</Text>
+        <ButtonForm
+          title="SIGN UP"
+          cridentials={{
+            email: this.state.email,
+            password: this.state.password,
+            nick: this.state.nick
+          }}/>
+        <Text>{this.state.email}</Text>
         <Text>{this.state.password}</Text>
         <Text>{this.state.passwordConfirm}</Text>
         <Text>{this.state.nick}</Text>
@@ -94,35 +101,40 @@ const TextForm = (props) => {
 }
 
 const ButtonForm = (props) => {
+  const cridentials = props.cridentials;
+
+  async function getResponse () {
+    try {
+      const message = await postUserInfoToApi(cridentials)
+      return message
+    } catch (error) {
+      return 'Network Error'
+    }
+  }
+
   return (
     <View style={{flexDirection: 'row'}}>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={{
+        <TouchableOpacity
+          style={{
             backgroundColor: 'black',
             borderRadius: 10,
             height: 40,
             alignItems: 'center',
             justifyContent: 'center'
-            }}>
+            }}
+          onPress={() => {
+            const res = getResponse()
+            console.log('res', res)
+            alert(res)
+          }}
+            >
           <Text style={{color: 'white'}}>{props.title}</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
 }
-/* <View style={{flexDirection: 'row'}}>
-  <View style={styles.buttonContainer}>
-    <TouchableOpacity style={{
-        backgroundColor: 'black',
-        borderRadius: 10,
-        height: 40,
-        alignItems: 'center',
-        justifyContent: 'center'
-        }}>
-      <Text style={{color: 'white'}}>회원가입</Text>
-    </TouchableOpacity>
-  </View>
-</View> */
 
 const styles = StyleSheet.create({
   container: {
