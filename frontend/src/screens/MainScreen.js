@@ -22,17 +22,7 @@ import {
 // import Screens
 import SplashScreen from './SplashScreen'
 
-async function getResponseFromApi() {
-  try {
-    let response = await fetch('http://localhost:8081/status', {
-      method: 'GET'
-    });
-    let responseJson = await response.json();
-    return responseJson.message;
-  } catch (error) {
-    console.log(error)
-  }
-}
+import { getResponseFromApi } from '../services/request'
 
 /**
  * This Class is MainScreen of this application.
@@ -73,12 +63,18 @@ export default class MainScreen extends Component {
     if (data !== null) {
       this.setState({ isLoading: false })
     }
-    const message = await getResponseFromApi();
-    console.log(message)
-    if (message !== null) {
-      this.setState({
-        messageChecker: message
-      });
+  }
+  async signInButtonRequester() {
+    try {
+      const message = await getResponseFromApi();
+      console.log(message)
+      if (message !== null) {
+        this.setState({
+          messageChecker: message
+        });
+      }
+    } catch (error) {
+      alert("Network Error")
     }
   }
   render() {
@@ -110,30 +106,34 @@ export default class MainScreen extends Component {
         <View>
           <Text>{this.state.messageChecker}</Text>
         </View>
-        <ButtonComponent/>
+        {/* <ButtonComponent/> */}
+        <View style={styles.buttonContainer}>
+          <Button
+            style={styles.buttonStyle}
+            title="SIGN IN"
+            color="#F78181"
+            onPress={() => {
+              // this.textInputValidChecker();
+              this.signInButtonRequester();
+            }}/>
+          <Button
+            style={styles.buttonStyle}
+            title="SIGN UP"
+            color="#000000"
+            onPress={() => {
+              this.goSignupScreen();
+            }}/>
+        </View>
       </View>
     );
   }
 }
 
-const ButtonComponent = () => {
-  return (
-    <View style={styles.buttonContainer}>
-      <Button
-        style={styles.buttonStyle}
-        title="SIGN IN"
-        color="#F78181"
-        onPress={() => {
-          this.textInputValidChecker()
-        }}/>
-      <Button
-        style={styles.buttonStyle}
-        title="SIGN UP"
-        color="#000000"
-        onPress={() => this.goSignupScreen()}/>
-    </View>
-  );
-}
+// const ButtonComponent = () => {
+//   return (
+    
+//   );
+// }
 
 const styles = StyleSheet.create({
   container: {
