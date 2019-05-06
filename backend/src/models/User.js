@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false // 필수 입력
     },
     nick: {
-      type: DataTypes.String(15),
+      type: DataTypes.STRING(15),
       allowNull: false // 필수 입력
     }
   }, {
