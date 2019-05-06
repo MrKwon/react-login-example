@@ -106,10 +106,16 @@ const ButtonForm = (props) => {
   async function getResponse () {
     try {
       const message = await postUserInfoToApi(cridentials)
-      return message
+      setState({
+        response: message
+      })
     } catch (error) {
       return 'Network Error'
     }
+  }
+
+  state = {
+    response: ''
   }
 
   return (
@@ -124,9 +130,8 @@ const ButtonForm = (props) => {
             justifyContent: 'center'
             }}
           onPress={() => {
-            const res = getResponse()
-            console.log('res', res)
-            alert(res)
+            getResponse()
+            alert(state.response)
           }}
             >
           <Text style={{color: 'white'}}>{props.title}</Text>
