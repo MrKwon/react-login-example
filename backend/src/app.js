@@ -12,18 +12,19 @@ app.use(morgan('combined'))
 app.use(bodyParser.json())
 app.use(cors())
 
-app.get('/status', (req, res) => {
-  res.send({
-    message: 'Hello World!'
-  })
-})
+require('./routes')(app)
+// app.get('/status', (req, res) => {
+//   res.send({
+//     message: 'Hello World!'
+//   })
+// })
 
-app.post('/register', (req, res) => {
-  console.log(req.body)
-  res.send({
-    message: `Hello ${req.body.email}, Sign Up Success !`
-  })
-})
+// app.post('/register', (req, res) => {
+//   console.log(req.body)
+//   res.send({
+//     message: `Hello ${req.body.email}, Sign Up Success !`
+//   })
+// })
 
 sequelize.sync()
   .then(() => {
