@@ -1,3 +1,6 @@
+const AuthController = require('./controllers/AuthContorller')
+const AuthControllerPolicy = require('./policies/AuthContorllerPolicy')
+
 module.exports = (app) => {
   app.get('/status', (req, res) => {
     res.send({
@@ -5,10 +8,8 @@ module.exports = (app) => {
     })
   })
   
-  app.post('/register', (req, res) => {
-    console.log(req.body)
-    res.send({
-      message: `Hello ${req.body.email}, Sign Up Success !`
-    })
-  })
+  app.post('/register',
+    AuthControllerPolicy.register,
+    AuthController.register
+  )
 }
